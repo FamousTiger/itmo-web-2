@@ -1,0 +1,131 @@
+.form-block
+{
+    border: solid black;
+    box-shadow: 0 0 10px #000000;
+    font-size: 12px;
+    margin: 2%;
+    background: #FFC700;
+    display: inline-block;
+}
+
+#form
+{
+    width: 70vw;
+    padding: 2%;
+    vertical-align: middle;
+}
+
+.form-title
+{
+    font-size: 20px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#settings
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.settings-wrapper
+{
+    margin: 0 35px;
+}
+
+.form-item
+{
+    display: flex;
+    margin-top: 2px;
+}
+.form-item label
+{
+    margin: 0 10px 0 0;
+    font-size: 14px;
+}
+.form-item select
+{
+    flex: 1;
+}
+
+#settings input[type="submit"]
+{
+    margin-top: 10px;
+    width: 120px;
+    height: 46px;
+    font-size: 12px;
+    border: 1px solid black;
+    box-shadow: 0 0 6px #000000;
+    background: #FFFFFF;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease-in;
+}
+#settings input[type="submit"]:hover
+{
+    background-color: #E1DFDD;
+}
+
+.task-list
+{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: auto;
+    font-size: 18px;
+}
+
+.day
+{
+    display: flex;
+    flex-direction: column;
+    line-break: anywhere;
+}
+.day input
+{
+    margin-top: 2px;
+    height: 36px;
+    font-size: 14px;
+}
+.day input:disabled
+{
+    background: #E1DFDD;
+}
+.day-name
+{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.task-data
+{
+    border: 1px solid black;
+    box-shadow: 0 0 6px #000000;
+    margin-top: 6px;
+    text-align: center;
+}
+.task-data__index
+{
+    margin-top: 4px;
+    font-size: 16px;
+}
+.task-data__content
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+    .task-list
+    {
+        flex-direction: column;
+    }
+}

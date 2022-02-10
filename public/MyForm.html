@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Базовые метаинформации -->
+    <meta charset="UTF-8">
+    <title>Федотенко Николай M33122</title>
+    <meta name="description" content="Сайт-резюме Федотенко Николая Владимировича">
+    <meta name="keywords" content="резюме,портфолио,ИТМО">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/outlines.css">
+    <link rel="stylesheet" href="css/Form.css">
+    <!-- Javascript -->
+    <script src="JS/NavBar.js"></script>
+    <script src="JS/FormLoader.js"></script>
+</head>
+<body>
+<div class="card">
+    <!-- Header -->
+    <header>
+        <div class="title">
+            <h1>Николай Федотенко</h1>
+        </div>
+        <div class="nav-bar">
+            <nav>
+                <a href="index.html"><span id="SD" class="link">Разработчик C++</span></a>
+                <a href="RendererEngineer.html"><span id="RE" class="link">Рендер инженер</span></a>
+                <a href="./MyForm.html"><span class="link">TODO List</span></a>
+            </nav>
+        </div>
+    </header>
+    <div class="form-block" id="form">
+        <span class="form-title"><h2>Список заданий на неделю</h2></span>
+
+        <form id="settings">
+            <h2>Настройки</h2>
+
+            <div class="settings-wrapper">
+            <div class="form-item">
+                <label>Максимальное число заданий
+                    <select name="tasks-number">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </label>
+            </div>
+            </div>
+
+            <div class="form-item">
+                <label>Количество дней
+                    <select name="days-number">
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                </label>
+            </div>
+
+            <input type="submit" value="Создать">
+        </form>
+        <div class="task-list"></div>
+
+        <template id="day-template">
+            <div class="day">
+                <div class="day-name"></div>
+                <form>
+                    <label>
+                        <input placeholder="Введите задание" type="text" name="text">
+                    </label>
+                </form>
+                <div class="day-tasks"></div>
+            </div>
+        </template>
+        <template id="task-template">
+            <div class="task-data">
+                <div class="task-data__index"></div>
+                <div class="task-data__content"></div>
+            </div>
+        </template>
+    </div>
+    <div id="time"></div>
+</div>
+</body>
+</html>

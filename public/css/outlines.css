@@ -1,0 +1,304 @@
+body
+{
+    background: black;
+    color: black;
+    font-family: "Fira Code", monospace;
+    backdrop-filter: blur(10px);
+    letter-spacing: 2px;
+    word-spacing: 2px;
+}
+.wrapper
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.wrapper-child
+{
+    width: 20%;
+}
+
+a:visited
+{
+    color:black;
+}
+a:hover
+{
+    color: black;
+    background-color: #E1DFDD;
+    border-radius: 78px;
+}
+a.active
+{
+    color: white;
+}
+
+.card
+{
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 2vh;
+    background: #FFFFFF;
+}
+
+.title
+{
+    text-align: center;
+}
+
+.nav-bar
+{
+    border: solid black;
+    box-shadow: 0 0 10px #000000;
+    text-align: center;
+    background: #FFC700;
+    font-size: 25px;
+    padding-top: 25px;
+    font-weight: 2;
+    text-indent: 1px;
+    word-spacing: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.nav-bar nav
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+.link
+{
+    margin: 4vh;
+    font-size: 30px;
+}
+
+.inf-block
+{
+    border: solid black;
+    box-shadow: 0 0 10px #000000;
+    font-size: 12px;
+    margin: 2%;
+    background: #FFC700;
+}
+
+.block-title
+{
+    width: 100%;
+    font-size: 20px;
+    text-decoration: underline
+}
+
+#about
+{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    /*width: 70vw;*/
+    padding: 2%;
+}
+
+#image 
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#me
+{
+    border: solid black;
+    box-shadow: 0 0 10px #000000;
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+}
+
+.facts
+{
+    margin: 0;
+    font-size: 24px;
+    width: 50%;
+    text-align: left;
+}
+
+#stack-block
+{
+    text-align: center;
+    height: 33vw;
+    overflow: scroll;
+}
+
+.stack-list
+{
+    background: white;
+    border: solid black;
+    width: 4vw;
+    height: 2vw;
+    margin: 5%;
+    overflow: scroll;
+}
+
+.skill-pic
+{
+    margin: 2.5%;
+    width: 80px;
+    height: 80px;
+    background: #FFFFFF;
+    border-radius: 25px;
+    border: solid black;
+    padding: 10px;
+    overflow: hidden;
+}
+
+#code-block
+{
+    overflow: hidden;
+    text-align: center;
+    height: 35vw;
+}
+
+#code
+{
+    overflow: hidden;
+    background: black;
+    width: 60vw;
+    height: 28.2vw;
+    text-align: left;
+    font-style: italic;
+    color: #FFFFFF;
+    margin-left: 10%;
+    line-height: 1.2;
+}
+
+#projects
+{
+    text-align: center;
+    width: 76.5vw;
+    display: inline-table;
+    height: auto;
+    padding-bottom: 5%;
+}
+
+.project-pic
+{
+    position: relative;
+    display: flex;
+    object-fit: contain;
+    width: 76.5vw;
+}
+
+#contact
+{
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+#study
+{
+    width: 30vw;
+    height: 30vw;
+}
+
+@media screen and (max-width: 1800px) {
+    #code-block
+    {
+        display: none;
+    }
+
+    .skill-pic
+    {
+        width: 60%;
+        height: 60%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .link 
+    {
+        font-size: 24px;
+    }
+
+    .nav-bar nav
+    {
+        flex-direction: column;
+    }
+
+    #facts
+    {
+        width: 100%;
+        margin: 0 5px;
+    }
+
+    #image 
+    {
+        width: 100%;
+    }
+
+    #me
+    {
+        width: 50%;
+        height: auto;
+    }
+
+    .skill-pic 
+    {
+        width: 50%;
+        height: 50%;
+    }
+    
+    #about
+    {
+        flex-direction: column;
+    }
+}
+
+.preloader {
+    position: relative;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 2px;
+    width: 100px;
+    height: 100px;
+    margin: 30px auto;
+}
+.preloader > div {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    transform: scale(0);
+    transform-origin: center center;
+    animation: preloader-4-anim 2s infinite linear;
+}
+.preloader > div:nth-of-type(1),
+.preloader > div:nth-of-type(5),
+.preloader > div:nth-of-type(9) {
+    animation-delay: 0.4s;
+}
+.preloader > div:nth-of-type(4),
+.preloader > div:nth-of-type(8) {
+    animation-delay: 0.2s;
+}
+.preloader > div:nth-of-type(2),
+.preloader > div:nth-of-type(6) {
+    animation-delay: 0.6s;
+}
+.preloader > div:nth-of-type(3) {
+    animation-delay: 0.8s;
+}
+@keyframes preloader-anim {
+    0% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+    80% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
