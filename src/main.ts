@@ -6,12 +6,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
+    AppModule
   );
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
 
-  const port = new ConfigService().get<number>('PORT') || 12345;
+  const port = app.get(ConfigService).get<number>('PORT') || 12345;
   await app.listen(port);
 }
 bootstrap();
