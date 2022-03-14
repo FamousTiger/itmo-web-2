@@ -20,6 +20,7 @@ export class AppController {
   @Render('index')
   root() {
     return {
+      signed_in: true,
       data: {
         facts: [
           'Живу в Санкт-Петербурге',
@@ -125,7 +126,7 @@ export class AppController {
   @Get('RenderEngineer')
   @Render('RenderEngineer')
   renderEngineerPage() {
-    return { signed_in: true };
+    return;
   }
 
   @Get('MyForm')
@@ -138,8 +139,7 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    // return this.authService.login(req.user);
-    return req.redirect('/');
+    return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)

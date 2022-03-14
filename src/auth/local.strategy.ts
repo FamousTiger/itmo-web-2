@@ -14,7 +14,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
-    this.authService.setSignedInState(true);
     return user;
   }
 }
