@@ -1,6 +1,9 @@
 (() => {
-    window.onload = () => {
-        const timer = (performance.now() / 1000).toFixed(3);
-        document.getElementById("time").innerHTML= "Время загрузки страницы: " + timer + "c";
-    };
+  window.onload = () => {
+    const timer = Math.round(performance.now());
+    const currentText = document.getElementById('time').innerHTML;
+    document.getElementById(
+      'time',
+    ).innerHTML = `Время загрузки страницы: ${timer} ms (клиент) ${currentText}`;
+  };
 })();

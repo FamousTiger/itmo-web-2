@@ -202,6 +202,53 @@ a.active
     height: 30vw;
 }
 
+#login
+{
+    padding: 8px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.login-wrapper
+{
+    margin: 0 35px;
+    display: flex;
+    justify-content: flex-end;
+}
+.login-wrapper a
+{
+    color: red;
+}
+
+.form-item label
+{
+    margin: 0 10px 0 0;
+    font-size: 14px;
+}
+.form-item select
+{
+    flex: 1;
+}
+
+#login input[type="submit"]
+{
+    margin-top: 10px;
+    width: 100px;
+    height: 32px;
+    font-size: 12px;
+    border: 1px solid black;
+    box-shadow: 0 0 6px #000000;
+    background: #FFFFFF;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease-in;
+}
+#login input[type="submit"]:hover
+{
+    background-color: #E1DFDD;
+}
+
 @media screen and (max-width: 1800px) {
     #code-block
     {

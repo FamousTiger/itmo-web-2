@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {{> head }}
+  <script src="JS/Network.js"></script>
+  <script src="JS/SlidrWork.js"></script>
+  <script type="text/javascript" src="JS/slidr/slidr.min.js"></script>
+</head>
+<body>
+<div class="card">
+  <!-- Header -->
+  <header>
+    {{> header }}
+  </header>
+
+  <main>
+
+    <div class="inf-block" id="about">
+      <span class="block-title"><h2>Главные факты обо мне</h2></span>
+      <div class="facts" id="facts">
+        <ol>
+          {{#each data.facts}}
+            <li>{{{ this }}}</li>
+          {{/each}}
+        </ol>
+      </div>
+      <div class="image" id="image">
+        <img id="me" src="https://avatars.githubusercontent.com/u/32329133?v=4" alt="My photo">
+      </div>
+    </div>
+    <div class="inf-block" id="code-block">
+
+      <span class="block-title"><h2>Пример моего кода</h2></span>
+      <div id="code">
+        <pre>
+            <code>
+    template &lt;typename T&gt;
+    static constexpr bool is_land_or_air_transport_v =
+    std::is_same&lt;T, LandTransport&gt;::value ||
+    std::is_same&lt;T, AirTransport&gt;::value;
+
+    template &lt; typename T, class = std::enable_if_t&lt;
+        !is_land_or_air_transport_v&lt;T&gt; &gt; &gt;
+    inline T FindFastestTransport
+    (std::vector&lt;T&gt;&amp; transports,
+    double          distance) = delete;
+
+    template &lt;typename T&gt;
+    inline T FindFastestTransport
+        (std::vector&lt;T&gt;&amp; transports,
+        double          distance)
+    {
+        T ans;
+        double minTime = std::numeric_limits&lt;double&gt;::max();
+        for (auto transport : transports)
+        {
+            if (transport.Update(distance) &lt; minTime)
+            {
+                minTime = transport.Update(distance);
+                ans = transport;
+            }
+        }
+        return ans;
+    }
+
+            </code>
+        </pre>
+      </div>
+    </div>
+    <div class="inf-block" id="stack-block">
+      <span class="block-title"><h2>Мой стэк</h2></span>
+      <form>
+        <button type="button" onclick="setPlaceHolder(1 + Math.floor(Math.random() * 4))">
+          Получить новый PlaceHolder
+        </button>
+      </form>
+      <div class="wrapper">
+        <!-- Skills -->
+        {{#each data.skills}}
+          <div class="wrapper-child">
+            <img class="skill-pic" src={{{ this.link }}} alt={{{ this.name }}}>
+          </div>
+        {{/each}}
+        <!-- PlaceHolders -->
+        {{#times 5}}
+          <div class="wrapper-child">
+            <img id="img{{ this }}" class="skill-pic" src="#" alt="PlaceHolder{{ this }}">
+          </div>
+        {{/times}}
+      </div>
+
+    </div>
+    <div class="inf-block" id="projects">
+      <span class="block-title"><h2>Мои проекты</h2></span>
+      <div id="slidr-img">
+        {{#each data.projects}}
+          <img class="project-pic" data-slidr={{{ this.id }}} src={{{ this.link }}} alt={{{ this.name }}}/>
+        {{/each}}
+      </div>
+    </div>
+
+  </main>
+  <!-- Footer -->
+  <footer>
+    {{> footer }}
+  </footer>
+</div>
+</body>
+</html>

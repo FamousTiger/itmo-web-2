@@ -1,0 +1,20 @@
+{{#unless signed_in}}
+<div class="login-wrapper">
+    <form id="login" action="/auth/login" method="post" target="_blank">
+        <label for="username">
+            <input placeholder="Логин" type="text" id="username" name="username">
+        </label>
+        <label for="password">
+            <input placeholder="Пароль" type="text" id="password" name="password">
+        </label>
+        <input type="submit" value="Войти">
+    </form>
+</div>
+{{else}}
+<div class="login-wrapper" style="margin-bottom: 8px">
+    Вы авторизованы под именем Николай&nbsp;
+    <form id="logout" action="/logout" method="post" target="_blank">
+        <button type='submit' name='parameter'>Выйти</button>
+    </form>
+</div>
+{{/unless}}

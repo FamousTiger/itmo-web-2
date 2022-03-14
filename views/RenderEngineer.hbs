@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {{> head}}
+    <link rel="stylesheet" href="css/Animate.css">
+</head>
+<body>
+<div class="card">
+<!-- Header -->
+<header>
+  {{> header }}
+</header>
+
+  <main>
+
+    <div class="inf-block" id="study">
+        В процессе переквалификации
+        <div class="wrapper">
+          {{#times 11}}
+            <div class="line line{{ this }}">
+              <span class="circle circle-top"></span>
+              <div class="dotted">
+                <span class="dot dot-top"></span>
+                <span class="dot dot-middle-top"></span>
+                <span class="dot dot-middle-bottom"></span>
+                <span class="dot dot-bottom"></span>
+              </div>
+              <span class="circle circle-bottom"></span>
+            </div>
+          {{/times}}
+        </div>
+    </div>
+
+  </main>
+
+</div>
+</body>
+</html>
