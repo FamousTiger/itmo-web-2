@@ -7,6 +7,11 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { FactService } from './data/services/fact.service';
+import { SkillService } from './data/services/skill.service';
+import { ProjectService } from './data/services/project.service';
+import { Fact as FactModel, Skill as SkillModel, Project as ProjectModel } from '@prisma/client';
+
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -14,7 +19,12 @@ import { TimerInterceptor } from './timer.interceptor';
 
 @Controller()
 export class AppController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private readonly factService: FactService,
+    private readonly skillService: SkillService,
+    private readonly projectService: ProjectService,
+  ) {}
 
   @Get()
   @Render('index')

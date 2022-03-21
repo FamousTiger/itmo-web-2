@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import { PrismaService } from './data/services/prisma.service';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -22,6 +23,9 @@ async function bootstrap() {
     for (let i = 1; i <= n; ++i) accum += block.fn(i);
     return accum;
   });
+
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
 
   const port = app.get(ConfigService).get<number>('PORT') || 12345;
   await app.listen(port);
