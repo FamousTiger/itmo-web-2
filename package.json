@@ -4,7 +4,7 @@
   "description": "Labs for Web development course at ITMO University (IS, 6 sem)",
   "author": "Nikolay Fedotenko <kalkolay@protonmail.com> (https://kalkolay.github.io/ITMO-WEB/)",
   "private": true,
-  "license": "MIT",
+  "license":"MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -42,7 +42,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^5.6.2",
+    "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/cookie-parser": "^1.4.2",
