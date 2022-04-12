@@ -3,7 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import { PrismaService } from './data/services/prisma.service';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { FactModule } from './fact/fact.module';
+import { SkillModule } from './skill/skill.module';
+import { ProjectModule } from './project/project.module';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -24,8 +27,16 @@ async function bootstrap() {
     return accum;
   });
 
-  const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
+  const config = new DocumentBuilder()
+    .setTitle('Nikolay Fedotenko: Portfolio')
+    .setDescription('My Portfolio API description')
+    .setVersion('1.0')
+    .addTag('ITMO')
+    .build();
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [FactModule, SkillModule, ProjectModule],
+  });
+  SwaggerModule.setup('api', app, document);
 
   const port = app.get(ConfigService).get<number>('PORT') || 12345;
   await app.listen(port);

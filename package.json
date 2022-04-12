@@ -27,6 +27,7 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^5.2.1",
     "@prisma/client": "^3.11.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.17.2",
@@ -37,10 +38,11 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.0.0",
+    "@nestjs/cli": "^5.6.2",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/cookie-parser": "^1.4.2",
@@ -56,6 +58,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.2.5",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.6",
     "prettier": "^2.3.2",
     "prisma": "^3.11.0",
     "source-map-support": "^0.5.20",
