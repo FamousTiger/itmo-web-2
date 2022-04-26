@@ -7,6 +7,8 @@ import { UsersModule } from './users/users.module';
 import { FactModule } from './fact/fact.module';
 import { SkillModule } from './skill/skill.module';
 import { ProjectModule } from './project/project.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 @Module({
   imports: [
@@ -18,6 +20,12 @@ import { ProjectModule } from './project/project.module';
     ProjectModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

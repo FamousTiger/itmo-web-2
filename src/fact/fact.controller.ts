@@ -5,63 +5,60 @@ import {
   Delete,
   Body,
   Param,
-  NotImplementedException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiOkResponse,
+  ApiBadRequestResponse,
+} from '@nestjs/swagger';
 import { FactService } from './fact.service';
+import { FactDto } from './dto/fact.dto';
 import { Fact } from '@prisma/client';
 
 @Controller('fact')
 export class FactController {
-  constructor(private factService: FactService) {}
+  constructor(private readonly factService: FactService) {}
 
   @ApiOperation({
     summary: 'Get all facts',
   })
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'OK',
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
   })
   @Get('all')
   public async getAllFacts(): Promise<Fact[]> {
-    throw new NotImplementedException();
+    return this.factService.facts({});
   }
 
   @ApiOperation({
     summary: 'Add a new fact',
   })
-  @ApiResponse({
-    status: 200,
-    description: 'OK',
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
+  @ApiOkResponse({
+    description: 'Fact has been successfully added',
   })
   @Post('create')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async addFact(@Body() id: number, fact: string): Promise<void> {
-    throw new NotImplementedException();
+  public async addFact(@Body() factData: FactDto): Promise<Fact> {
+    const factToAdd = { fact: factData.fact };
+    return await this.factService.createFact(factToAdd);
   }
 
   @ApiOperation({
     summary: 'Delete existing fact by ID',
   })
-  @ApiResponse({
-    status: 200,
-    description: 'OK',
+  @ApiOkResponse({
+    description: 'Fact has been successfully deleted',
   })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
+  @ApiBadRequestResponse({
+    description: 'Fact not found',
   })
   @Delete(':id/delete')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async deleteFactById(@Param('id') id: number): Promise<void> {
-    throw new NotImplementedException();
+  public async deleteFactById(@Param('id') id: number): Promise<Fact> {
+    const factToDelete = await this.factService.fact({ id: Number(id) });
+    if (factToDelete == null) {
+      throw new HttpException('Fact not found', HttpStatus.BAD_REQUEST);
+    }
+    return this.factService.deleteFact({ id: Number(id) });
   }
 }

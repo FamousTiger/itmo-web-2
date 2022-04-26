@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 import { FactModule } from './fact/fact.module';
 import { SkillModule } from './skill/skill.module';
 import { ProjectModule } from './project/project.module';
@@ -37,6 +38,8 @@ async function bootstrap() {
     include: [FactModule, SkillModule, ProjectModule],
   });
   SwaggerModule.setup('api', app, document);
+
+  app.useGlobalPipes(new ValidationPipe());
 
   const port = app.get(ConfigService).get<number>('PORT') || 12345;
   await app.listen(port);

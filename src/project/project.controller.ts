@@ -5,67 +5,64 @@ import {
   Delete,
   Body,
   Param,
-  NotImplementedException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiOkResponse,
+  ApiBadRequestResponse,
+} from '@nestjs/swagger';
 import { ProjectService } from './project.service';
+import { ProjectDto } from './dto/project.dto';
 import { Project } from '@prisma/client';
 
 @Controller('project')
 export class ProjectController {
-  constructor(private projectService: ProjectService) {}
+  constructor(private readonly projectService: ProjectService) {}
 
   @ApiOperation({
     summary: 'Get all projects',
   })
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'OK',
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
   })
   @Get('all')
   public async getAllProjects(): Promise<Project[]> {
-    throw new NotImplementedException();
+    return this.projectService.projects({});
   }
 
   @ApiOperation({
     summary: 'Add a new project',
   })
-  @ApiResponse({
-    status: 200,
-    description: 'OK',
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
+  @ApiOkResponse({
+    description: 'Project has been successfully added',
   })
   @Post('create')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async addProject(
-    @Body() id: string,
-    name = '',
-    link: string,
-  ): Promise<void> {
-    throw new NotImplementedException();
+  public async addProject(@Body() projectData: ProjectDto): Promise<Project> {
+    const projectToAdd = {
+      id: projectData.id,
+      name: projectData.name,
+      link: projectData.link,
+    };
+    return await this.projectService.createProject(projectToAdd);
   }
 
   @ApiOperation({
     summary: 'Delete existing project by ID',
   })
-  @ApiResponse({
-    status: 200,
-    description: 'OK',
+  @ApiOkResponse({
+    description: 'Project has been successfully deleted',
   })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
+  @ApiBadRequestResponse({
+    description: 'Project not found',
   })
   @Delete(':id/delete')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async deleteProjectById(@Param('id') id: number): Promise<void> {
-    throw new NotImplementedException();
+  public async deleteProjectById(@Param('id') id: string): Promise<Project> {
+    const projectToDelete = await this.projectService.project({ id: id });
+    if (projectToDelete == null) {
+      throw new HttpException('Project not found', HttpStatus.BAD_REQUEST);
+    }
+    return this.projectService.deleteProject({ id: id });
   }
 }
