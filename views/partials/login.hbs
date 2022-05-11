@@ -1,8 +1,9 @@
 {{#unless signed_in}}
+<!-- Login for -->
 <div class="login-wrapper">
-    <form id="login" action="/auth/login" method="post" target="_blank">
-        <label for="username">
-            <input placeholder="Логин" type="text" id="username" name="username">
+    <form id="login" action="/auth/login" method="post">
+        <label for="email">
+            <input placeholder="Email" type="text" id="email" name="email">
         </label>
         <label for="password">
             <input placeholder="Пароль" type="text" id="password" name="password">
@@ -10,10 +11,22 @@
         <input type="submit" value="Войти">
     </form>
 </div>
+<!-- Registration form -->
+<div class="login-wrapper">
+  <form id="login" action="/auth/register" method="post">
+    <label for="email">
+      <input placeholder="Email" type="text" id="email" name="email">
+    </label>
+    <label for="password">
+      <input placeholder="Пароль" type="text" id="password" name="password">
+    </label>
+    <input type="submit" value="Регистрация">
+  </form>
+</div>
 {{else}}
 <div class="login-wrapper" style="margin-bottom: 8px">
-    Вы авторизованы под именем Николай&nbsp;
-    <form id="logout" action="/logout" method="post" target="_blank">
+    Вы авторизованы под именем {{user_email}}&nbsp;
+    <form id="logout" action="/logout" method="post">
         <button type='submit' name='parameter'>Выйти</button>
     </form>
 </div>

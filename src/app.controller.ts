@@ -2,26 +2,40 @@ import {
   Controller,
   Get,
   Render,
-  Request,
   Post,
-  UseGuards,
   UseInterceptors,
+  Req,
+  Res,
 } from '@nestjs/common';
-
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import { LocalAuthGuard } from './auth/local-auth.guard';
-import { AuthService } from './auth/auth.service';
 import { TimerInterceptor } from './timer.interceptor';
+import { AppService } from './app.service';
+import * as jsonwebtoken from 'jsonwebtoken';
+import { credential } from 'firebase-admin';
+import { FirebaseApp } from './auth/firebase-app';
+import firebaseui from 'firebaseui';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import firebaseConfig from './auth/firebase-config';
 
 @Controller()
 export class AppController {
-  constructor(private authService: AuthService) {}
+  app: firebase.app.App;
+  signed_in = false;
+  user_email: string;
+
+  constructor(private readonly appService: AppService) {
+    this.app = firebase.initializeApp({
+      apiKey: process.env.API_KEY,
+    });
+  }
 
   @Get()
   @Render('index')
   root() {
     return {
-      signed_in: true,
+      signed_in: this.signed_in,
+      user_email: this.user_email,
       data: {
         facts: [
           'Живу в Санкт-Петербурге',
@@ -127,35 +141,50 @@ export class AppController {
   @Get('RenderEngineer')
   @Render('RenderEngineer')
   renderEngineerPage() {
-    return;
+    return { signed_in: this.signed_in, user_email: this.user_email };
   }
 
   @Get('MyForm')
   @Render('MyForm')
   @UseInterceptors(TimerInterceptor)
   myFormPage() {
-    return;
+    return { signed_in: this.signed_in, user_email: this.user_email };
   }
 
-  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  async login(@Req() req, @Res() res) {
+    try {
+      const user = await firebase
+        .auth()
+        .signInWithEmailAndPassword(req.body.email, req.body.password);
+      const idToken = await user.user?.getIdToken();
+      res.cookie('access_token', idToken);
+      this.signed_in = true;
+      this.user_email = req.body.email;
+      return res.redirect('back');
+    } catch (e) {
+      console.log('Failed to sign in');
+      return res.redirect('back');
+    }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  @Post('auth/register')
+  async register(@Req() req, @Res() res) {
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(req.body.email, req.body.password);
+      return res.redirect('back');
+    } catch (e) {
+      console.log('Failed to register');
+      return res.redirect('back');
+    }
   }
 
-  @UseGuards(LocalAuthGuard)
   @Post('logout')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async logout(@Request() req) {
-    // await this.authService.logout();
-    return {
-      signed_in: true,
-    };
+  async logout(@Req() req, @Res() res) {
+    res.clearCookie('access_token');
+    this.signed_in = false;
+    return res.redirect('back');
   }
 }

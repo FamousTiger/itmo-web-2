@@ -33,14 +33,18 @@
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",
     "express": "^4.17.2",
+    "firebase-admin": "^10.1.0",
+    "firebaseui": "^6.0.1",
     "hbs": "^4.2.0",
     "passport": "^0.5.2",
+    "passport-firebase-jwt": "^1.2.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "supertokens-node": "^9.2.0",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
