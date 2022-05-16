@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {{> head}}
+</head>
+<body>
+<div class="card">
+  <!-- Header -->
+  <header>
+    {{> header }}
+  </header>
+
+  <main>
+
+    <div class="inf-block" id="contact">
+      <div>
+        <ul id="messages"></ul>
+      </div>
+
+      <div>
+        <input id="message" type="text" spellcheck="false" />
+        <button onclick="send()">Send</button>
+      </div>
+    </div>
+
+  </main>
+  <!-- Footer -->
+  <footer>
+    {{> footer }}
+  </footer>
+</div>
+</body>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="JS/Chat.js"></script>
+</html>

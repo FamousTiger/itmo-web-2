@@ -17,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
 import { FirebaseApp } from './auth/firebase-app';
 import { PreAuthMiddleware } from './auth/pre-auth-middleware';
 import { AuthStrategy } from './auth/auth.strategy';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthStrategy } from './auth/auth.strategy';
     FactModule,
     SkillModule,
     ProjectModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [
